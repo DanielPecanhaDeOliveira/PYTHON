@@ -1,2 +1,2 @@
 # PYTHON
- Vários exercicios feitos  em python
+ Vários exercicios e games feitos  em python
