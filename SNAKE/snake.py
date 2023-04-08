@@ -15,5 +15,8 @@ while loop:
         #Se for um evento QUIT('Saida')
         if event.type == pygame.QUIT:
             loop = False
+        
+        
+    
 #Encerrando módulos de Pygame
 pygame.quit()
