@@ -7,8 +7,8 @@ pygame.init()
 
 
 #Criando a tela do game
-altura = 600
-largura = 600
+largura = 800
+altura = 720
 #Gerando o nascimento da cobra
 x_cobra = int(altura/2)
 y_cobra = int(largura/2)
@@ -24,6 +24,7 @@ y_maca = randint(0, 380)
 #Escrevendo um texto que marque quantos pontos fizemos(aqui definimos somente a fonte, cor, suavizão do texto,
 # para printar isso na tela do game devemos chamar mais tarde essa função dentro do loop principal)
 fonte = pygame.font.SysFont('arial', 30, True, True)
+fonte2 = pygame.font.SysFont('arial', 30, False, False)
 pontos = 0
 #Definindo o titulo da janela do game
 pygame.display.set_caption('Snake')
@@ -33,6 +34,7 @@ relogio = pygame.time.Clock()
 
 lista_cobra = []
 comprimemto_inicial = 5
+morreu = False
 
 #Criando função que aumenta a cobra
 def aumenta_cobra(lista_cobra):
@@ -42,6 +44,18 @@ def aumenta_cobra(lista_cobra):
         #XeY[1] = y
         pygame.draw.rect(screen, (0, 255, 0), (XeY[0], XeY[1], 20, 20) )
 
+def reiniciar_jogo():
+    #Esta função irá zerar todas as variaveis e reiniciar o jogo
+    global pontos, comprimemto_inicial, x_cobra, y_cobra, lista_cabeça, lista_cobra, x_maca, y_maca, morreu
+    pontos =  0
+    comprimemto_inicial = 5
+    x_cobra = int(altura/2)
+    y_cobra = int(largura/2)
+    lista_cabeça = []
+    lista_cobra = []
+    x_maca = randint(0, 380)
+    y_maca = randint(0, 380)
+    morreu = False
 
 
 #Criando loop principal
@@ -95,6 +109,34 @@ while True:
     
     #Criando o corpo da cobra 
     lista_cobra.append(lista_cabeça)
+    #Se as posições da cabeça forem maiores que um ou seja, duplicadas significa que a cobra bateu nela mesma e morreu
+    if lista_cobra.count(lista_cabeça) > 1:
+        morreu = True
+        while morreu:
+            screen.fill((255, 255, 255))
+            mensagem = 'GAME OVER! Aperte a tecla R para jogaar novamente' 
+            texto_formatado2 = fonte2.render(mensagem, True, (0, 0, 0))
+            rect_texto = texto_formatado2.get_rect()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    exit()
+                if event.type == KEYDOWN:
+                    if event.key == K_r:
+                        reiniciar_jogo()
+            rect_texto.center = (largura//2, altura//2)
+            screen.blit(texto_formatado, (240, 20))
+            screen.blit(texto_formatado2, rect_texto)
+            pygame.display.update()
+    if x_cobra > largura:
+        x_cobra = 0
+    if x_cobra < 0:
+        x_cobra = largura
+    if y_cobra  > altura:
+        y_cobra = 0
+    if y_cobra < 0:
+        y_cobra = altura
+
     #Devemos definir um tamanho para nossa cobra inicialmente, se não fizermos isso a nossa cobra vai crescer sem parar antes mesmo de acertar o alvo 'maçã'
     if len(lista_cobra)> comprimemto_inicial:
         del lista_cobra[0]
