@@ -2,7 +2,9 @@
 import random
 from time import sleep
 #Criando cabeçalho
-print('{:^30}'.format('\033[32mJOKEMPO\033[m'))
+print('=' *20)
+print('{:^30}'.format('\033[32mJOKENPÔ\033[m'))
+print('=' *20)
 opçoes = ['PEDRA', 'PAPEL','TESOURA']
 pc = random.choice(opçoes)
 #Criando menu    
@@ -10,6 +12,7 @@ menu = ('''\n[0] PEDRA
 [1] PAPEl 
 [2] TESOURA\n''')
 print(menu)
+print('=' *20)
 user = int(input('Qual vc escolhe? '))
 sleep(1.5)
 print('='*25)
@@ -21,24 +24,24 @@ sleep(2)
 #Verificando o ganhador 
 if user == 0:
     if pc == 'PEDRA':
-        print('EMPATE!')
+        print('\033[33mEMPATE!\033[m')
     if pc == 'PAPEL':
-        print('O computador ganhou!')
+        print('\033[31mO computador ganhou!\033[m')
     if pc == 'TESOURA':
         print('Você ganhou!')
 if user == 1:
     if pc == 'PEDRA':
-        print('Você ganhou!')
+        print('\033[32mVocê ganhou!\033[m')
     if pc == 'PAPEL':
-        print('EMPATE!')
+        print('\033[33mEMPATE!\033[m')
     if pc == 'TESOURA':
-        print('O computador ganhou!')
+        print('\033[31mO computador ganhou!\033[m')
 if user == 2:
     if pc == 'PEDRA':
-        print('O computador ganhou!')
+        print('\033[31mO computador ganhou!\033[m')
     if pc == 'PAPEL':
         print('Você ganhou!')
     if pc == 'TESOURA':
-        print('EMPATE!')
+        print('\033[33mEMPATE!\033[m')
 print('\033[m='*25)
 
