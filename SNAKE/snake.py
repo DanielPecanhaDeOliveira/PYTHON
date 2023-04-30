@@ -2,6 +2,9 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from random import randint
+from random import choice
+
+cores = [(128,0,128), (0,0,139), (0,191,255)]
 #Inicializando modulos do  pygame
 pygame.init()
 
@@ -143,8 +146,8 @@ while True:
     aumenta_cobra(lista_cobra)
 
     #Desenhando nossa cobra e maçã na tela
-    cobra = pygame.draw.rect(screen, (0, 255, 0), (x_cobra, y_cobra, 20, 20))
-    maca = pygame.draw.rect(screen, (255, 0, 0), (x_maca, x_maca, 20, 20))
+    cobra = pygame.draw.rect(screen, (0, 255, 250), (x_cobra, y_cobra, 20, 20))
+    maca = pygame.draw.rect(screen, choice(cores), (x_maca, x_maca, 20, 20))
     
     #Criando colisão da cobra com a maçã
     if cobra.colliderect(maca):
